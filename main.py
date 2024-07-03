@@ -19,8 +19,3 @@ if st.button('Submit'):
     image = Image.open(images[0][0])
     st.image(image, caption=images[0][1], use_column_width=True)
 
-# if st.button("Find Image"):
-#     st.write(f"Finding image for {user_input}...")
-#     lst_image = query(user_input)
-#     for image in lst_image:
-#         st.image(image, caption=user_input)

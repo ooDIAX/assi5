@@ -45,26 +45,16 @@ def load_or_create_faiss_index(image_features_array, index_path='data/faiss.inde
 
     return index
 
-def get_index(index_path='data/faiss.index'):
-    if os.path.exists(index_path):
-        # Load existing index if it exists
-        print(f'Loading existing FAISS index from: {os.path.abspath(index_path)}')
-        index = faiss.read_index(index_path)
-        return index
-    
-    
-    # Load the CLIP model and processor from Hugging Face
-    # model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
-    # processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+# Load the CLIP model and processor from Hugging Face
+model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
-    # Load the training data
-    # data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'train_cat_breeds.csv'))
-    # df_train = pd.read_csv(data_path)
+# Load the training data
+data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'train_cat_breeds.csv'))
+df_train = pd.read_csv(data_path)
 
-    # # Preprocess images and encode them
-    # image_features_array, image_paths = preprocess_and_encode_images(df_train, processor, model)
+# Preprocess images and encode them
+image_features_array, image_paths = preprocess_and_encode_images(df_train, processor, model)
 
-    # # Create and save FAISS index
-    # faiss_index = load_or_create_faiss_index(image_features_array)
-
-get_index()
+# Create and save FAISS index
+faiss_index = load_or_create_faiss_index(image_features_array)
